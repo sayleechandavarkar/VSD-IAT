@@ -1,8 +1,5 @@
 # VSD-IAT Physical Design Workshop
 
-  
-
-
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
@@ -92,10 +89,15 @@
 
 <!-- ABOUT THE WORKSHOP -->
 ## ABOUT THE WORKSHOP
-   It was a five day workshop that involved understanding the open source EDA OPENLANE that uses the sky130 PDK. OpenLANE is an automated RTL to GDSII
-   flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault, OpenPhySyn, SPEF-Extractor and custom methodology scripts for 
-   design exploration and optimization. OPENLANE rc6 version strives to complete the entire ASIC design flow with minimal human intervention. The goal 
-   is to make human-in-the-loop parameter to zero. 
+   PDKs are essentially files that decribe the fabrication process for the tools and they are closed-source. With the release of PDKs by Google and Skywater
+   has lead to the advent of open-source ASIC design. OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, 
+   Magic, Netgen, Fault, OpenPhySyn, SPEF-Extractor and custom methodology scripts for design exploration and optimization. OPENLANE rc6 version strives to
+   complete the entire ASIC design flow with minimal human intervention. The goal is to make human-in-the-loop parameter to zero. This 5 day workshop aims at
+   exploring the entire ASIC design flow using the OpenLANE tool along with the Skywater 130nm PDK. 
+   
+### DAY 1
+  One Day 1 we begin by understanding the entire RTL2GDS flow along with understanding the inner workings of Openlane in conjunstion with Skywater 130nm PDK
+  
    
    
 The inputs to the ASIC design flow are:
