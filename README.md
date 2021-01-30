@@ -23,9 +23,6 @@
       </ul>
     </li>
     <li>
-      <a href="#rtl-to-gdsii-introduction">RTL to GDSII Introduction</a>
-    </li>
-    <li>
       <a href="#day-1-inception-of-open-source-eda">Day 1 Inception of Open Source EDA</a>
       <ul>
         <li><a href="#skywater-pdk-files">Skywater PDK Files</a></li>
@@ -222,14 +219,15 @@
 <!-- Day 1 Inception of Open Source EDA -->
 ## Day 1 Inception of Open Source EDA
 
+![](/Images/LAB1_ss4.png)
 ### Skywater PDK Files
 
 We make sure that the PDK files are included and invoked by running the docker. 
-docker run -it -v $(pwd):/openLANE_flow -v $PDK_ROOT:$PDK_ROOT -e PDK_ROOT=$PDK_ROOT -u $(id -u $USER):$(id -g $USER) openlane:rc6
+**docker run -it -v $(pwd):/openLANE_flow -v $PDK_ROOT:$PDK_ROOT -e PDK_ROOT=$PDK_ROOT -u $(id -u $USER):$(id -g $USER) openlane:rc6**
 
 ### Invoking OpenLane
 
-We invoke openlane by going to the /path_to_openlane_dir and typing in ./flow.tcl. By passing the flag -interactive we can running it manually. To run the
+We invoke openlane by going to the /path_to_openlane_dir and typing in **./flow.tcl**. By passing the flag **-interactive** we can running it manually. To run the
 entire flow automatically we pass the design along with it.
 
 ### Package Importing
@@ -248,11 +246,15 @@ information.
 
 ### Synthesis
 
-Run Synthesis by typing in the following command. STA should also be performed after the synthesis process. You should be able to see timing reports inside 
-the synthesis folder inside each run.  
+Run Synthesis by typing in the **run_synthesis** command. STA should also be performed after the synthesis process. You should be able to see timing reports
+inside the synthesis folder inside each run.  
+
+![](/Images/LAB1_ss6.png)
 
 <!-- Day 2 Chip Floorplanning and Standard Cells-->
 ##  Day 2 Chip Floorplanning and Standard Cells
+
+![](/Images/LAB1_ss9.png)
 
 ### Aspect Ratio and Utilization Factor
 
@@ -277,13 +279,10 @@ Pin placement is an essential part of floorplanning to minimize buffering and im
 
 ### Floorplanning with OpenLANE
 
-To run floorplan in OpenLANE:
+To run floorplan in OpenLANE type in the command **run_floorplan**. As with all other stages, the floorplanning will be run according to configuration settings 
+in the design specific config.tcl file. The output the the floorplanning phase is a DEF file which describes core area and placement of standard cell
 
-  ![](/images/11.png)
-
-As with all other stages, the floorplanning will be run according to configuration settings in the design specific config.tcl file. The output the the floorplanning phase is a DEF file which describes core area and placement of standard cell SITES:
-
-  ![](/images/12.png)
+![](/Images/LAB1_ss5.png)
 
 ### Viewing Floorplan in Magic
 
@@ -291,14 +290,17 @@ Floorplan can be viewed by using a tool called Magic inside the openlane flow. T
 
 ### Placement
 
-The synthesized netlist has been mapped to standard cells and floorplanning phase has determined the standard cells rows, enabling placement. OpenLANE does
-placement in two stages. In Global Placement optimizations are done to reduce wirelength by reducing half parameter wirelength and for Detailed Placement
-Legalizes placement of cells into standard cell rows. Overflow value conerges to zero during the placement run. In rc6 version, along with placemnet the power distribution is also performed which was not the case for earlier versions. Also see the post placement stats in the picture below. 
+Placement is run by typing in the command **run_placement**.The synthesized netlist has been mapped to standard cells and floorplanning phase has determined the 
+standard cells rows, enabling placement. OpenLANE does placement in two stages. In Global Placement optimizations are done to reduce wirelength by reducing half
+parameter wirelength and for Detailed Placement legalizes placement of cells into standard cell rows. Overflow value conerges to zero during the placement run.
+In rc6 version, along with placemnet the power distribution is also performed which was not the case for earlier versions. Also see the post placement stats in
+the picture below. 
 
 ### Viewing Placement in Magic
 
-To view placement in Magic the command is as follows
+To view placement in Magic the command is as follows 
 
+![](/Images/LAB2_ss6.png)
 
 ### Standard Cell Design Flow
 
