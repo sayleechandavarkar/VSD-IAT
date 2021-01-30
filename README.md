@@ -119,27 +119,57 @@
   One Day 1 we begin by understanding the entire RTL2GDS flow along with understanding the inner workings of Openlane flow
   
   Let's Review the RTL2GDS Flow
-  #### RTL2GDS
+   #### RTL2GDS
+  
+  ![](/Images/RTL2GDS.png)
+  
+  1. Chip Specification
+     This step basically involves engineers creating an RTL/custom design based on the functionalities their system wishes to achieve. These specifications
+     could be in the areas of Power, Area, Speed, etc
+     
+  2. Functional Verification
+     This process involves making sure the correctness of the RTL design/logic by performing behavioural simulation by passing an exhaustive list of test 
+     vectorsvarious means of coverage like statement, expression, toggle, etc
+     
+  3. Synthesis
+     Synthesis generates a gate-level netlist of the RTL code generated in the first step keeping in mind all the timing constraints
+  
+  4. Chip Partitioning
+     Dividing the entire design into multiple functional blocks for performing hierarchical integration considering multiple factors like Power, Area, Speed
+  
+  5. DFT Insertion
+     Design for Test Insertion. It includes scan path insertion, built-in Self-Test, automatic test pattern generation
+  
+  6. Post-Synthesis STA Analysis
+     Performs setup and hold time analysis on different path groups.
+  
+  7. Floorplanning
+     It process of determining the position of the blocks around the entire layout of the chip. A good floorplan will have minimum area and easy routing paths
+     
+  8. Placement
+     Process for placing the standard cells 
+  
+  9. Clock Tree Synthesis
+     Clock tree synthesis is a process of building the clock tree and meeting the defined timing, area and power requirements. It helps in providing the 
+     clock connection to the clock pin of a sequential element in the required time and area, with low power consumption.
+     
+ 10. Routing 
+     It consists of global and detailed routing. In global routing, calculates the values for each net by determining the delay associated with the wire. 
+     In detailed routing, the actual delays of wire is calculated by methods like timing optimization, clock tree synthesis, etc.
+     
+ 11. Final Verification and GDS
+     Final verification includes checks like DRC(Design rule check), LVS(Netlist vs Schematic). GDSII is the file produced and used by the semiconductor
+     foundries to fabricate the chip
   
   
-  #### OPENLANE FLOW
   
-   
-   
-The inputs to the ASIC design flow are:
-
-    - Process Design Rules: DRC, LVS, PEX
-    - Device Models (SPICE)
-    - Digital Standard Cell Libraries
-    - I/O Libraries
-
-Process Design Kit (PDK) is the interface between the CAD designers and the foundry. The PDK is a collection of files used to model a fabrication process for the EDA tools used in designing an IC. PDK’s are traditionally closed-source and hence are the limiting factor to open-source Digital ASIC Design. Google and Skywater have broken this stigma and published the world’s first open-source PDK on June 30th, 2020. This breakthrough has been a catalyst for open-source EDA tools. This workshop focuses on using the open-source RTL2GDS EDA tool, OpenLANE, in conjunction with the Skywater 130nm PDK to perform the full RTL2GDS flow as shown below:
-
-![](/images/openlane_flow.png)
-
-OpenLANE flow consists of several stages. By default, all flow steps are run in sequence. Each stage may consist of multiple sub-stages. OpenLANE can also be run interactively as shown here.
-
-  1. Synthesis
+   #### OPENLANE FLOW
+  
+  ![](/images/openlane_flow.png)  
+ 
+   OpenLANE flow consists of several stages. By default, all flow steps are run in sequence.
+  
+   1. Synthesis
 
   <ul>
       <li> Yosys - Performs RTL synthesis using GTech mapping</li>
@@ -188,57 +218,6 @@ OpenLANE flow consists of several stages. By default, all flow steps are run in 
       <li>Magic - Performs DRC Checks & Antenna Checks</li>
       <li>Netgen - Performs LVS Checks </li>
   </ul>
-
-   
-
-<!-- GETTING STARTED -->
-
-## RTL to GDSII Introduction
-
-From conception to product, the ASIC design flow is an iterative process that is not static for every design. The details of the flow may change depending on ECO’s, IP requirements, DFT insertion, and SDC constraints, however the base concepts still remain. The flow can be broken down into 11 steps:
-
-  1. Architectural Design – A system engineer will provide the VLSI engineer with specifications for the system that are determined through physical constraints. The VLSI engineer will be required to design a circuit that meets these constraints at a microarchitecture modeling level.
-
-  2. RTL Design/Behavioral Modeling – RTL design and behavioral modeling are performed with a hardware description language (HDL). EDA tools will use the HDL to perform mapping of higher-level components to the transistor level needed for physical implementation. HDL modeling is normally performed using either Verilog or VHDL. One of two design methods may be employed while creating the HDL of a microarchitecture:
-
-      a. 	RTL Design – Stands for Register Transfer Level. It provides an abstraction of the digital   circuit using:
-      
-      <ul>
-        <li>i. 	Combinational logic</li>
-        <li>ii. 	Registers</li>
-        <li>iii. 	Modules (IP’s or Soft Macros)</li>
-      </ul>
-
-      b. 	Behavioral Modeling – Allows the microarchitecture modeling to be performed with behavior-based modeling in HDL. This method bridges the gap between C and HDL allowing HDL design to be performed
-
-  3. RTL Verification - Behavioral verification of design
-
-  4. DFT Insertion - Design-for-Test Circuit Insertion
-
-  5. Logic Synthesis – Logic synthesis uses the RTL netlist to perform HDL technology mapping. The synthesis process is normally performed in two major steps:
-
-  <ul>
-      <li> GTECH Mapping – Consists of mapping the HDL netlist to generic gates what are used to perform logical optimization based on AIGERs and other topologies created from the generic mapped netlist.</li>
-      <li>Technology Mapping – Consists of mapping the post-optimized GTECH netlist to standard cells described in the PDK</li>
-  </ul>
-        
-Standard Cells – Standard cells are fixed height and a multiple of unit size width. This width is an integer multiple of the SITE size or the PR boundary. Each standard cell comes with SPICE, HDL, liberty, layout (detailed and abstract) files used by different tools at different stages in the RTL2GDS flow.
-
-  6. Post-Synthesis STA Analysis: Performs setup analysis on different path groups.
-
-  7. Floorplanning – Goal is to plan the silicon area and create a robust power distribution network (PDN) to power each of the individual components of the synthesized netlist. In addition, macro placement and blockages must be defined before placement occurs to ensure a legalized GDS file. In power planning we create the ring which is connected to the pads which brings power around the edges of the chip. We also include power straps to bring power to the middle of the chip using higher metal layers which reduces IR drop and electro-migration problem.
-
-  8. Placement – Place the standard cells on the floorplane rows, aligned with sites defined in the technology lef file. Placement is done in two steps: Global and Detailed. In Global placement tries to find optimal position for all cells but they may be overlapping and not aligned to rows, detailed placement takes the global placement and legalizes all of the placements trying to adhere to what the global placement wants.
-
-  9. CTS – Clock tree synteshsis is used to create the clock distribution network that is used to deliver the clock to all sequential elements. The main goal is to create a network with minimal skew across the chip. H-trees are a common network topology that is used to achieve this goal.
-
-  10.  Routing – Implements the interconnect system between standard cells using the remaining available metal layers after CTS and PDN generation. The routing is performed on routing grids to ensure minimal DRC errors.
-    
-The Skywater 130nm PDK uses 6 metal layers to perform CTS, PDN generation, and interconnect routing.
-Shown below is an example of a base RTL to GDS flow in ASIC design:
-
-![](/images/asic_flow.png)
-
 
 <!-- Day 1 Inception of Open Source EDA -->
 ## Day 1 Inception of Open Source EDA
