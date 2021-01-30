@@ -574,5 +574,5 @@ After routing has been completed interconnect parasitics can be extracted to per
 ## Acknowledgements
 * [Kunal Ghosh - Co-founder (VSD Corp. Pvt. Ltd)](https://github.com/kunalg123)
 * [Nickson Jose - VSD VLSI Engineer](https://github.com/nickson-jose)
-* [OPENLANE] (https://github/efabless/openlane)
+* [OPENLANE] (https://github.com/efabless/openlane)
 * [Grant Brown](https://gitlab.com/gab13c/openlane-workshop/-/blob/master/README.md)
