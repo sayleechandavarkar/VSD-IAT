@@ -115,7 +115,8 @@ These are some of the things you would need to get started with the tools locall
           
 ### Installation
 
-          For all the necessary information needed to get the latest version of the tool please go to https://github.com/nickson-jose/openlane_build_script
+          For all the necessary information needed to get the latest version of the standalone OPENLANE build or the VSDflow build
+          please visit https://github.com/nickson-jose/openlane_build_script
 
 ## RTL to GDSII Introduction
 
