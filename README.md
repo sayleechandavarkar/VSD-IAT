@@ -521,11 +521,11 @@ After .db generation users can perform tool configuration followed by reporting 
 ![](/Images/LAB4_ss25.png)
 
 OTHER RESULTS FROM LAB
-![](/Images/LAB4_ss32_skew.png)
+![](/Images/LAB4_ss34_skew.png)
 
 ![](/Images/LAB4_ss32_hold.png)
 
-![](/Images/LAB4_ss32_setup.png)
+![](/Images/LAB4_ss33_setup.png)
 
 
 <!-- Day 5 Final Steps in RTL to GDSII -->
@@ -546,11 +546,6 @@ The PDN feature within OpenLANE will create:
   3. Power straps to bring power into the center of the chip
   4. Power rails for the standard cells
   
-![](/Images/LAB5_ss4.png)
-
-![](/Images/LAB5_ss5.png)
-
-
 Note: The pitch of the metal 1 power rails defines the height of the standard cells
 
 ### Global and Detailed Routing
@@ -562,13 +557,15 @@ OpenLANE uses TritonRoute as the routing engine for physical implementations of 
 
 ### To run routing in OpenLANE:
 
-![](/images/55.png)
+![](/Images/LAB5_ss4.png)
 
 If DRC errors persist after routing the user has two options:
   1. Re-run routing with higher QoR settings
   2. Manually fix DRC errors specific in tritonRoute.drc file
 
 ### SPEF Extraction
+
+![](/Images/LAB5_ss5.png)
 
 After routing has been completed interconnect parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file. The SPEF extractor is not included within OpenLANE as of now. 
 
