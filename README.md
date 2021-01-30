@@ -118,7 +118,7 @@
   One Day 1 we begin by understanding the entire RTL2GDS flow along with understanding the inner workings of Openlane flow
   
   Let's Review the RTL2GDS Flow
-  #### RTL2GDS2
+  #### RTL2GDS
   
   
   #### OPENLANE FLOW
