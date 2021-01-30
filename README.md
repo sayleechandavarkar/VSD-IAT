@@ -114,14 +114,14 @@
    complete the entire ASIC design flow with minimal human intervention. The goal is to make human-in-the-loop parameter to zero. This 5 day workshop aims at
    exploring the entire ASIC design flow using the OpenLANE tool along with the Skywater 130nm PDK. 
    
-### Day 1
+### DAY 1
   One Day 1 we begin by understanding the entire RTL2GDS flow along with understanding the inner workings of Openlane flow
   
   Let's Review the RTL2GDS Flow
   #### RTL2GDS
   
   
-  #### OpenLANE flow
+  #### OPENLANE FLOW
   
    
    
