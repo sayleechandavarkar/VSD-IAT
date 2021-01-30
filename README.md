@@ -8,7 +8,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-workshop">About the worksho</a>
+      <a href="#about-the-workshop">About the workshop</a>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
