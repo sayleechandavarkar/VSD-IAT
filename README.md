@@ -8,7 +8,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-the-workshop">About the worksho</a>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -94,12 +94,12 @@
 
 
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+<!-- ABOUT THE WORKSHOP -->
+## About the workshop
 
-This project gives an interactive tutorial experied during the VSD Advanced Physical Design workshop using OpenLANE.
+This was a five day workshop that involved understanding the open source EDA OPENLANE that uses the sky130 PDK.
 
-OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault, OpenPhySyn, SPEF-Extractor and custom methodology scripts for design exploration and optimization. It is a tool started for true open source tape-out experience and comes with APACHE version 2.0 . The goal of OpenLANE is to produce clean GDSII without any human intervention. OpenLANE is tuned for Skywater 130nm open-source PDK and can be used to produce hard macros and chips.
+OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault, OpenPhySyn, SPEF-Extractor and custom methodology scripts for design exploration and optimization. OPENLANE rc6 version strives to complete the entire ASIC design flow with minimal human intervention. The goal is to make human-in-the-loop parameter to zero. 
 
 
 <!-- GETTING STARTED -->
