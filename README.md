@@ -190,6 +190,7 @@
       <li>OpenPhySyn - Performs timing optimizations on the design</li>
       <li>OpenDP - Perfroms detailed placement to legalize the globally placed components</li>
   </ul>
+  
   3. CTS
 
   <ul>
