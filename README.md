@@ -296,20 +296,24 @@ parameter wirelength and for Detailed Placement legalizes placement of cells int
 In rc6 version, along with placemnet the power distribution is also performed which was not the case for earlier versions. Also see the post placement stats in
 the picture below. 
 
+![](/Images/LAB2_ss6.png)
+
 ### Viewing Placement in Magic
 
 To view placement in Magic the command is as follows 
 
-![](/Images/LAB2_ss6.png)
+![](/Images/LAB2_ss9.png)
+
+![](/Images/LAB2_s10.png)
 
 ### Standard Cell Design Flow
 
 Standard cell design is made up of three parts
 
-  1. Inputs - PDKs (Process design kits), DRC & LVS rules, SPICE models, library & user-defined specs.
-  2. Design Steps - Design steps of cell design involves Circuit Design, Layout Design, Characterization. GUNA is used for characterization. 
-     The characterization can be classified into Timing, Power and Closure.
-  3. Outputs - Outputs of the Design are CDL (Circuit Description Language), GDSII, LEF, extracted Spice netlist (.cir), timing, noise, power.libs, function.
+1. Inputs - PDKs (Process design kits), DRC & LVS rules, SPICE models, library & user-defined specs.
+2. Design Steps - Design steps of cell design involves Circuit Design, Layout Design, Characterization. GUNA is used for characterization. 
+   The characterization can be classified into Timing, Power and Closure.
+3. Outputs - Outputs of the Design are CDL (Circuit Description Language), GDSII, LEF, extracted Spice netlist (.cir), timing, noise, power.libs, function.
 
 ### Standard Cell Characterization
 
@@ -342,13 +346,15 @@ layer metals.
 
 ### Magic Layout View of Inverter Standard Cell
 
+![](/Images/LAB3_ss1.png)
+
 Refer to: https://github.com/nickson-jose/vsdstdcelldesign for cell files.
 
-To invoke Magic:
+To invoke Magic use .mag file specified in the said directoory
 
-  ![](/images/20.png)
+![](/Images/LAB3_ss2.png)
 
-  ![](/images/21.png)
+![](/Images/LAB3_ss3.png)
 
 ### Magic Key Features:
 
@@ -356,16 +362,14 @@ One of the most important aspects of Magiic is that it performs DRC check on the
   1. Color Palette - Defines layers and associated colors
   2. Device Inference - Automatic recognition of NMOS and PMOS devices
   
-
 ### Device Inference
 
-Select the specific layer/device by hovering over the object and pressing, s, iteratively, until you traverse the hierarchy to the specified object:
+Select the specific layer/device by hovering over the object and pressing, s, iteratively, until you traverse the hierarchy to the specified object or you see the 
+entire connection getting selected. For e.x if you hover over Y and click s multiple(3) times it will select the entire drain to drain path.
 
-![](/images/22.png)
+Run the **what** command in the tkcon window to see the information about the selected object
 
-Run the what command in the tkcon window:
-
-![](/images/23.png)
+![](/Images/LAB3_ss6.png)
 
 ### DRC Errors
 
@@ -377,25 +381,34 @@ For more information on how to fix these DRC errors using Magic please refer to:
 ### PEX Extraction with Magic
 
 Extract the parasitics from the layout by performing the following
-![](/images/27.png)
+![](/Images/LAB3_ss4.png)
 
 After generating the extracted file we need to output the .ext file to a spice file:
 
-![](/images/28.png)
-
-![](/images/29.png)
+![](/Images/LAB3_ss5.png)
 
 ### Spice Wrapper for Simulation
 
-![](/images/30.png)
+![](/Images/LAB3_ss7.png)
 
-To run the simulation with ngspice, invoke the ngspice tool with .cir file as the input
+To run the simulation with ngspice, invoke the ngspice tool with .cir file as the input i.e by following the command **ngspice sky130_inv.spice**
 
-![](/images/31.png)
+The plot can be viewed by plotting the output vs time while sweeping the input, the command for which is as follows **plot y vs time a**
+You should be able to see another window with waveform shown below
 
-The plot can be viewed by plotting the output vs time while sweeping the input:
+![](/Images/LAB3_ss8.png)
 
-![](/images/32.png)
+Some of the other calculation results like rise transition, fall transition, rise propagation delay and fall propagagtion delay are displayed in order. 
+Transistion is calculated by measuring the times associated with 20% and 80% of the Max voltage of the output waveform.
+Propagation is calculated by measuring the times associated from 50% to 50% of the input and output voltage waveform. 
+
+![](/Images/LAB3_ss9_riset.png)
+
+![](/Images/LAB3_ss10_fallt.png)
+
+![](/Images/LAB3_ss11_risep.png)
+
+![](/Images/LAB3_ss12_fallp.png)
 
 <!-- Day 4 Layout Timing Analysis and CTS -->
 ##  Day 4 Layout Timing Analysis and CTS
