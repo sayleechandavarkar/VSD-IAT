@@ -1,11 +1,5 @@
 # Advanced OpenLANE Workshop
 
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-
-  ![](/images/advanced_physical_design.png)
-
   <h3 align="center">Advanced Physical Design - OpenLANE Workshop</h3>
 </p>
 
