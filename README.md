@@ -459,97 +459,86 @@ Add additional statements to include extra cell LEFs. The commands are as shown 
   
 Check synthesis logs to ensure cell has been integrated correctly. As shown in the picture, it has been correctly included
 
-![](/Images/LAB4_ss7.png)
+![](/Images/LAB4_ss8.png)
 
 ### Fixing Slack Violations
 
-VLSI engineers will obtain system specifications in the architecture design phase. These specifications will determine a required frequency of operation. To analyze a circuit's timing performance designers will use static timing analysis tools (STA). When referring to pre clock tree synthesis STA analysis we are mainly concerned with setup timing in regards to a launch clock. STA will report problems such as worst negative slack (WNS) and total negative slack (TNS). These refer to the worst path delay and total path delay in regards to our setup timing restraint. Fixing slack violations can be debugged through performing STA analysis with OpenSTA, which is integrated in the OpenLANE tool. To describe these constraints to tools such as In order to ensure correct operation of these tools two steps must be taken:
+System specifications defined in the architecture phase determine a required frequency of operation. Circuit's timing performance is analyzed using static 
+timing analysis tools (STA). From the STA reports we can see worst negative slack (WNS) and total negative slack (TNS). These refer to the worst path delay
+and total path delay in regards to our setup timing restraint. Slack violations can be fixed through STA analysis with OpenSTA inside the openlane tool. We
+need Design configuration files (.conf) and Design Synopsys design constraint (.sdc) files for the performing the analysis.
 
-  1. Design configuration files (.conf) - Tool configuration files for the specified design
-  2. Design Synopsys design constraint (.sdc) files - Industry standard constraints file 
+For the design to be complete, the worst negative slack needs to be above or equal to 0. If the slack is lesser than that then we can do some of these things like
+changing the synthesis strategy, enabling cell_buffering, manually changing the buffers that are causing longr slews or maybe changing the max fan out on some of
+the nodes. 
 
-For the design to be complete, the worst negative slack needs to be above or equal to 0. If the slack is outside of this range we can do one of multiple things:
+To invoke OpenSTA with the configuration file use thee following command **sta pre_sta.conf** The pre_sta.conf file looks something like this
 
-  1. Review our synthesis strategy in OpenLANE
-  2. Enable cell buffering
-  3. Perform manual cell replacement on our WNS path with the OpenSTA tool
-  4. Optimize the fanout value with OpenLANE tool
-
-To invoke OpenSTA with the configuration file:
-
-![](/images/41.png)
+![](/Images/LAB4_ss16.png)
 
 ### Cell Fanout Example:
 
-![](/images/42.png)
+![](/Images/LAB4_ss17.png)
 
-The delay of this cell is large due to a high load capacitance due to high fanout. To fix this problem we can re-run synthesis within OpenLANE after reconfiguring the maximum fanout load value.
+The delay of a cell is large due to a high load capacitance due to high fanout. We fixed this problem by setting MAX_OUT parameter on the fly.
 
 ### Cell Replacement Example:
 
-![](/images/43.png)
+![](/Images/LAB4_ss18.png)
 
-To determine what loads our net is driving in OpenSTA we can report net connecitons:
+To determine what loads our net is driving in OpenSTA we can report net connecitons by using the command **report_net_connections**
 
-![](/images/44.png)
+To increase the drive strength we replace a net by a buffer, because the signal from this net could potentially get degraded along the way
+![](/Images/LAB4_ss20.png)
 
-To increase the drive strength of our buffer:
+After performing this optimization we can use the **write_verilog** command to get the improved netlist and use this improved netlist to run_floorplan and
+run_placement.
 
-![](/images/45.png)
-
-After performing this optimization we can use the write_verilog command of OpenSTA to output the improved netlist for use in the OpenLANE flow:
-
-![](/images/46.png)
 
 ### Clock Tree Synthesis
 
-After running floorplan and standard cell placement in OpenLANE we are ready to insert our clock tree for sequential elements in our design. Two of the main concerns with generation of the clock tree are:
-  
-  1. Clock skew - Difference in arrival times of the clock for sequential elements across the design
-  2. Delta delay - Skew introduced through capacitive coupling of the clock tree nets
+After floorplanning and placement we can now add clock tree inside our design. Two of the main concerns with generation of the clock tree are Clock skew and  
+Delta delay. Clock skew is difference in clock arrival latencies between different FFs on the same path. Delta skew is introduced by coupling.
 
-To run clock tree synthesis (CTS) in OpenLANE:
-
-![](/images/47.png)
-
-Note: To ensure timing constraints CTS will add buffers throughout the clock tree which will modify our netlist
+To run clock tree synthesis (CTS) in OpenLANE run the command **run_cts**
 
 ### Viewing Post-CTS Netlist
 
-OpenLANE will generate a new .def file containing information of our design after CTS is performed. To view this netlist we need to invoke the .def file with the Magic tool:
-
-![](/images/48.png)
+OpenLANE will generate a new .def file containing information of our design after CTS is performed. To view this netlist we need to invoke the .def file with the Magic tool
 
 ### Post-CTS STA Analysis
 
 OpenLANE has the OpenROAD application integrated into its flow. The OpenROAD application has OpenSTA integrated into its flow. Therefore, we can perform STA analysis from within OpenLANE by invoking OpenROAD.
 
-To invoke OpenROAD from OpenLANE:
+To invoke OpenROAD from OpenLANE type in **openroad**
 
-![](/images/49.png)
+![](/Images/LAB4_ss25.png)
 
-In OpenROAD the timing analysis is done by creating a .db database file. This database file is created from the post-cts LEF and DEF files. To generate the .db files within OpenROAD:
-
-![](/images/50.png)
-
-Note: Whenever the DEF file changes we need to recreate this .db file
+In OpenROAD the timing analysis is done by creating a .db database file. This database file is created from the post-cts LEF and DEF files. To generate the .db files within OpenROAD
 
 After .db generation users can perform tool configuration followed by reporting the propagated clock timing analysis:
 
-![](/images/51.png)
+![](/Images/LAB4_ss25.png)
+
+OTHER RESULTS FROM LAB
+![](/Images/LAB4_ss32_skew.png)
+
+![](/Images/LAB4_ss32_hold.png)
+
+![](/Images/LAB4_ss32_setup.png)
+
 
 <!-- Day 5 Final Steps in RTL to GDSII -->
 ##  Day 5 Final Steps in RTL to GDSII
 
-After generating our clock tree network and verifying post routing STA checks we are ready to generate the power distribution network in OpenLANE:
-
-![](/images/52.png)
+After generating our clock tree network and verifying post routing STA checks we are ready to generate the power distribution network in OpenLANE by using command
+**gen_pdn**
 
 ### Power Distribution Network Generation
 
 To generate the PDN in OpenLANE:
 
-![](/images/53.png)
+![](/Images/LAB5_ss3.png)
 
 The PDN feature within OpenLANE will create:
   1. Power ring global to the entire core
@@ -557,7 +546,10 @@ The PDN feature within OpenLANE will create:
   3. Power straps to bring power into the center of the chip
   4. Power rails for the standard cells
   
-  ![](/images/54.png)
+![](/Images/LAB5_ss4.png)
+
+![](/Images/LAB5_ss5.png)
+
 
 Note: The pitch of the metal 1 power rails defines the height of the standard cells
 
