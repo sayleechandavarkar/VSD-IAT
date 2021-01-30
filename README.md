@@ -95,25 +95,25 @@
 
 <!-- ABOUT THE WORKSHOP -->
 ## ABOUT THE WORKSHOP
- It was a five day workshop that involved understanding the open source EDA OPENLANE that uses the sky130 PDK. OpenLANE is an automated RTL to GDSII
- flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault, OpenPhySyn, SPEF-Extractor and custom methodology scripts for 
- design exploration and optimization. OPENLANE rc6 version strives to complete the entire ASIC design flow with minimal human intervention. The goal 
- is to make human-in-the-loop parameter to zero. 
+   It was a five day workshop that involved understanding the open source EDA OPENLANE that uses the sky130 PDK. OpenLANE is an automated RTL to GDSII
+   flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault, OpenPhySyn, SPEF-Extractor and custom methodology scripts for 
+   design exploration and optimization. OPENLANE rc6 version strives to complete the entire ASIC design flow with minimal human intervention. The goal 
+   is to make human-in-the-loop parameter to zero. 
 
 
 <!-- GETTING STARTED -->
 ## GETTING STARTED
 
-These are some of the things you would need to get started with the tools locally
+   These are some of the things you would need to get started with the tools locally
 
 ### INSTALLATION
    For all the necessary information needed to get the latest version of the standalone OPENLANE build or the VSDflow build
    please visit https://github.com/nickson-jose/openlane_build_script
    
    #### OTHER RESOURCES
-    1. Virtual Machine ---> e.x VirtualBox (Assuming you do not have Linux on your device)
-    2. Linux based OS  ---> e.x Ubuntu OS
-    3. 25GB+ Disk Space
+   1. Virtual Machine ---> e.x VirtualBox (Assuming you do not have Linux on your device)
+   2. Linux based OS  ---> e.x Ubuntu OS
+   3. 25GB+ Disk Space
 
 ## RTL to GDSII Introduction
 
