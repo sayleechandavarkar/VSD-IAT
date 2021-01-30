@@ -123,44 +123,43 @@
   
   ![](/Images/RTL2GDS.png)
   
-  1. Chip Specification
+  1. Chip Specification:
      This step basically involves engineers creating an RTL/custom design based on the functionalities their system wishes to achieve. These specifications
      could be in the areas of Power, Area, Speed, etc
      
-  2. Functional Verification
+  2. Functional Verification:
      This process involves making sure the correctness of the RTL design/logic by performing behavioural simulation by passing an exhaustive list of test 
      vectorsvarious means of coverage like statement, expression, toggle, etc
      
-  3. Synthesis
+  3. Synthesis:
      Synthesis generates a gate-level netlist of the RTL code generated in the first step keeping in mind all the timing constraints
   
-  4. Chip Partitioning
+  4. Chip Partitioning:
      Dividing the entire design into multiple functional blocks for performing hierarchical integration considering multiple factors like Power, Area, Speed
   
-  5. DFT Insertion
+  5. DFT Insertion:
      Design for Test Insertion. It includes scan path insertion, built-in Self-Test, automatic test pattern generation
   
-  6. Post-Synthesis STA Analysis
+  6. Post-Synthesis STA Analysis:
      Performs setup and hold time analysis on different path groups.
   
-  7. Floorplanning
+  7. Floorplanning:
      It process of determining the position of the blocks around the entire layout of the chip. A good floorplan will have minimum area and easy routing paths
      
-  8. Placement
+  8. Placement:
      Process for placing the standard cells 
   
-  9. Clock Tree Synthesis
+  9. Clock Tree Synthesis:
      Clock tree synthesis is a process of building the clock tree and meeting the defined timing, area and power requirements. It helps in providing the 
      clock connection to the clock pin of a sequential element in the required time and area, with low power consumption.
      
- 10. Routing 
+ 10. Routing: 
      It consists of global and detailed routing. In global routing, calculates the values for each net by determining the delay associated with the wire. 
      In detailed routing, the actual delays of wire is calculated by methods like timing optimization, clock tree synthesis, etc.
      
- 11. Final Verification and GDS
+ 11. Final Verification and GDS:
      Final verification includes checks like DRC(Design rule check), LVS(Netlist vs Schematic). GDSII is the file produced and used by the semiconductor
      foundries to fabricate the chip
-  
   
   
    #### OPENLANE FLOW
