@@ -13,7 +13,8 @@
     <li>
       <a href="#about-the-workshop">About the workshop</a>
       <ul>
-        <li><a href="#day-1">Day 1</a>
+        <li>
+          <a href="#basics">Basics</a>
           <ul>
             <li><a href="#rtl2gds">RTL2GDS</a></li>
             <li><a href="#openlane_flow">OpenLANE flow</a></li>
