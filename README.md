@@ -17,7 +17,7 @@
           <a href="#basics">Basics</a>
           <ul>
             <li><a href="#rtl2gds">RTL2GDS</a></li>
-            <li><a href="#openlane_flow">Openlane Flow</a></li>
+            <li><a href="#openlane-flow">Openlane Flow</a></li>
           </ul>
         </li>
       </ul>
