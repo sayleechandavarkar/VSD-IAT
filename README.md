@@ -17,7 +17,7 @@
           <a href="#basics">Basics</a>
           <ul>
             <li><a href="#rtl2gds">RTL2GDS</a></li>
-            <li><a href="#openlane_flow">OpenLANE flow</a></li>
+            <li><a href="#openlane_flow">Openlane Flow</a></li>
           </ul>
         </li>
       </ul>
@@ -115,7 +115,7 @@
    complete the entire ASIC design flow with minimal human intervention. The goal is to make human-in-the-loop parameter to zero. This 5 day workshop aims at
    exploring the entire ASIC design flow using the OpenLANE tool along with the Skywater 130nm PDK. 
    
-### DAY 1
+### BASICS
   One Day 1 we begin by understanding the entire RTL2GDS flow along with understanding the inner workings of Openlane flow
   
   Let's Review the RTL2GDS Flow
