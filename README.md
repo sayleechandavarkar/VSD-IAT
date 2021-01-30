@@ -13,8 +13,8 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+         <li><a href="#prerequisites">Prerequisites</a></li>
+         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li>
@@ -107,15 +107,15 @@ OpenLANE is an automated RTL to GDSII flow based on several components including
 
 These are some of the things you would need to get started with the tools locally on your computer.
 
-### Prerequisites
+   ### Prerequisites
 
-  1. Virtual Machine e.x VirtualBox (Assuming you do not have Linux on your device)
-  2. Linux based OS  e.x Ubuntu OS
-  3. 25GB+ Disk Space
+          1. Virtual Machine e.x VirtualBox (Assuming you do not have Linux on your device)
+          2. Linux based OS  e.x Ubuntu OS
+          3. 25GB+ Disk Space
 
-### Installation
+   ### Installation
 
-All the necessary information needed to get the latest version of the tool is available at : https://github.com/nickson-jose/openlane_build_script
+          All the necessary information needed to get the latest version of the tool is available at : https://github.com/nickson-jose/openlane_build_script
 
 ## RTL to GDSII Introduction
 
