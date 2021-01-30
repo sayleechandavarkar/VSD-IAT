@@ -1,8 +1,6 @@
-# Advanced OpenLANE Workshop
+# VSD-IAT Physical Design Workshop
 
-  <h3 align="center">Advanced Physical Design - OpenLANE Workshop</h3>
-</p>
-
+  
 
 
 <!-- TABLE OF CONTENTS -->
