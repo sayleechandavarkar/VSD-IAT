@@ -5,12 +5,20 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-workshop">About the workshop</a>
-    </li>
-    <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
          <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#about-the-workshop">About the workshop</a>
+      <ul>
+        <li><a hrf="#day-1">Day 1</a>
+          <ul>
+            <li><a href="#rtl2gds">RTL2GDS</a></li>
+            <li><a href="#openlane_flow">OpenLANE flow</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li>
@@ -85,7 +93,18 @@
   </ol>
 </details>
 
+## GETTING STARTED
 
+   These are some of the things you would need to get started with the tools locally
+
+### INSTALLATION
+   For all the necessary information needed to get the latest version of the standalone OPENLANE build or the VSDflow build
+   please visit https://github.com/nickson-jose/openlane_build_script
+   
+   #### OTHER RESOURCES
+   1. Virtual Machine ---> e.x VirtualBox (Assuming you do not have Linux on your device)
+   2. Linux based OS  ---> e.x Ubuntu OS
+   3. 25GB+ Disk Space
 
 <!-- ABOUT THE WORKSHOP -->
 ## ABOUT THE WORKSHOP
@@ -96,7 +115,13 @@
    exploring the entire ASIC design flow using the OpenLANE tool along with the Skywater 130nm PDK. 
    
 ### DAY 1
-  One Day 1 we begin by understanding the entire RTL2GDS flow along with understanding the inner workings of Openlane in conjunstion with Skywater 130nm PDK
+  One Day 1 we begin by understanding the entire RTL2GDS flow along with understanding the inner workings of Openlane flow
+  
+  Let's Review the RTL2GDS Flow
+  #### RTL2GDS2
+  
+  
+  #### OPENLANE FLOW
   
    
    
@@ -166,18 +191,6 @@ OpenLANE flow consists of several stages. By default, all flow steps are run in 
    
 
 <!-- GETTING STARTED -->
-## GETTING STARTED
-
-   These are some of the things you would need to get started with the tools locally
-
-### INSTALLATION
-   For all the necessary information needed to get the latest version of the standalone OPENLANE build or the VSDflow build
-   please visit https://github.com/nickson-jose/openlane_build_script
-   
-   #### OTHER RESOURCES
-   1. Virtual Machine ---> e.x VirtualBox (Assuming you do not have Linux on your device)
-   2. Linux based OS  ---> e.x Ubuntu OS
-   3. 25GB+ Disk Space
 
 ## RTL to GDSII Introduction
 
@@ -697,15 +710,8 @@ If DRC errors persist after routing the user has two options:
 After routing has been completed interconnect parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file. The SPEF extractor is not included within OpenLANE as of now. 
 
 
-
-<!-- CONTACT -->
-## Contact
-
-Grant Brown - u1249940@umail.utah.edu
-
-
-
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 * [Nickson Jose - VSD VLSI Engineer](https://github.com/nickson-jose)
 * [Kunal Ghosh - Co-founder (VSD Corp. Pvt. Ltd)](https://github.com/kunalg123)
+* [Grant Brown](https://gitlab.com/gab13c/openlane-workshop/-/blob/master/README.md)
