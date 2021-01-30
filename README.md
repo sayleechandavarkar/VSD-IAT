@@ -109,13 +109,13 @@ These are some of the things you would need to get started with the tools locall
 
 ### Prerequisites
 
-          1. Virtual Machine ---> e.x VirtualBox (Assuming you do not have Linux on your device)
-          2. Linux based OS  ---> e.x Ubuntu OS
-          3. 25GB+ Disk Space
+   1. Virtual Machine ---> e.x VirtualBox (Assuming you do not have Linux on your device)
+   2. Linux based OS  ---> e.x Ubuntu OS
+   3. 25GB+ Disk Space
           
 ### Installation
-          For all the necessary information needed to get the latest version of the standalone OPENLANE build or the VSDflow build
-          please visit https://github.com/nickson-jose/openlane_build_script
+   For all the necessary information needed to get the latest version of the standalone OPENLANE build or the VSDflow build
+   please visit https://github.com/nickson-jose/openlane_build_script
 
 ## RTL to GDSII Introduction
 
