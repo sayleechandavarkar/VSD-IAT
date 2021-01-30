@@ -224,94 +224,52 @@
 
 ### Skywater PDK Files
 
-The Skywater PDK files we are working with are described under $PDK_ROOT. There are three subdirectories needed for the workshop:
-
-![](/images/1.png)
-
-  1. Skywater-pdk – Contains all the foundry provided PDK related files
-  2. Open_pdks – Contains scripts that are used to bridge the gap between closed-source and open-source PDK to EDA tool compatibility
-  3. Sky130A – The open-source compatible PDK files
+We make sure that the PDK files are included and invoked by running the docker. 
+docker run -it -v $(pwd):/openLANE_flow -v $PDK_ROOT:$PDK_ROOT -e PDK_ROOT=$PDK_ROOT -u $(id -u $USER):$(id -g $USER) openlane:rc6
 
 ### Invoking OpenLane
 
-![](/images/2.png)
-
-  - ./flow.tcl is the script which runs the OpenLANE flow
-  - OpenLANE can be run interactively or in autonomous mode 
-  - To run interactively, use the -interactive option with the ./flow.tcl script 
+We invoke openlane by going to the /path_to_openlane_dir and typing in ./flow.tcl. By passing the flag -interactive we can running it manually. To run the
+entire flow automatically we pass the design along with it.
 
 ### Package Importing
-Different software dependencies are needed to run OpenLANE. To import these into the OpenLANE tool we need to run:
 
-![](/images/3.png)
+Different software dependencies are needed to run OpenLANE. We import these by typing in the package command seen in the above picture.
 
 ### Design Folder
-All designs run within OpenLANE are extracted from the openlane/designs folder:
 
-![](/images/4.png)
-
-### Design Folder Hierarchy
-
-![](/images/5.png)
-
-Each design hierarchy comes with two distinct components:
-  1. Src folder - Contains verilog files and sdc constraint files
-  2. Config.tcl files - Design specific configuration switches used by OpenLANE
-
-An example of a configuration file is given:
-
-  ![](/images/6.png)
+All designs run within OpenLANE are extracted from the openlane/designs folder.
 
 ### Prepare Design
-Prep is used to make file structure for our design. To set this up do:
 
-  ![](/images/7.png)
-
-After running this look in the openlane/design/picro32a folder and you will see there is a new directory structure created in this folder under the runs folder so to enable OpenLANE flow:
-
-  ![](/images/8.png)
-
-The config.tcl file shown in this folder contains all the parameters used by OpenLANE for this specific run.
-
-In addition, preparing the design in OpenLANE merges the technology LEF and cell LEF information. Technology LEF information contains layer definitions and a set of restricted design rules needed for PnR flow. The cell LEF contains obstruction information of each standard cell needed to minimize DRC errors during PnR flow:
-
-  ![](/images/9.png)
+Prep is used to make file structure for our design. We prepare the design by using the command prep as seen in the above image.
+After running it a new directory structure created under the runs folder so to enable OpenLANE flow. This process merges the technology LEF and cell LEF
+information. 
 
 ### Synthesis
 
-To run synthesis:
-
-  ![](/images/10.png)
-
-Note: Ensure the WNS is an acceptable number, if not please adjust the clock period to fix STA errors.
+Run Synthesis by typing in the following command. STA should also be performed after the synthesis process. You should be able to see timing reports inside 
+the synthesis folder inside each run.  
 
 <!-- Day 2 Chip Floorplanning and Standard Cells-->
 ##  Day 2 Chip Floorplanning and Standard Cells
 
-In Floorplanning we typically set the:
-  1. 	Die Area
-  2. 	Core Area
-  3. 	Core Utilization
-  4. 	Aspect Ratio
-  5. 	Place Macros
-  6. 	Power distribution network (Normally done here but done later in OpenLANE)
-  7. 	Place input and output pins
-
 ### Aspect Ratio and Utilization Factor
 
-Two key descriptions of a floorplan are utilization and aspect ratio. The amount of area of the die core the standard cells are taking up is called utilization. Normally we go for 50-70% utilization to, or utilization factor of 0.5-0.7. Keeping within this range allows for optimization of placement and realizable routing of a system. Aspect ratio can specify the shape of your chip by the height of the core area divided by the width of the core area. An aspect ratio of 1 discribes the chip as a square.
+The area of the die core taken up by standard cells are taking up is called utilization.Optimum values for utilization factors were found to be somwhere between 0.5 - 0.7. Aspect ratio can specify the shape of your chip by the height of the core area divided by the width of the core area. An aspect ratio of 1 discribes the chip as a square. Similarly, if the ratio is little off then the shape is a rectangle. 
 
 ### Preplaced Cells
 
-Preplaced cells, or MACRO’s, are important to enable hierarchical PnR flow. Preplaced cells enable VLSI engineers to granularize a larger design. In floorplanning we define locations and blockages for preplaced cells. Blockages are needed to ensure no standard cells are mapped where the placeplaced cells are located.
+Preplaced cells enable VLSI engineers to granularize a larger design. In floorplanning, position and blockages are decided for preplaced cells. Blockages are needed to ensure no standard cells are mapped where the placeplaced cells are located. Designer can the change the position of the preplaced block based on 
+convenience or efficiency of the overall layout
 
 ### Decoupling Capacitors
 
-Decoupling capacitors are placed local to preplaced cells during Floorplanning. Voltage drops associated with interconnect wires can heavily affect our noise margin or put it into an indeterminate state. Decoupling capacitor is a big capacitor located next to the macros to fix this problem. The capacitor will charge up to the power supply voltage over time and it will work as a charge reservoir when a transition is needed by the circuit instead of the charge coming from the power supply. Therefore it “decouples” the circuit from the main supply. The capacitor acts like the power supply.
+Voltage drops associated with interconnect wires can affect noise margin. It can also cause cross-talk or see undershoot or oveershoot volatges occuring. Decoupling capacitor is a big capacitor located next to the macros to fix this problem. The capacitor will charge up to the power supply voltage and it will work as a charge reservoir whenever there are occurances of drops. It is not always possible to have capacitors along near all the macros. 
 
 ### Power Planning
 
-Power planning during the Floorplanning phase is essential to lower noise in digital circuits attributed to voltage droop and ground bounce. Coupling capacitance is formed between interconnect wires and the substrate which needs to be charged or discharged to represent either logic 1 or logic 0. When a transition occurs on a net, charge associated with coupling capacitors may be dumped to ground. If there are not enough ground taps charge will accumulate at the tap and the ground line will act like a large resistor, raising the ground voltage and lowering our noise margin. To bypass this problem a robust PDN with many power strap taps are needed to lower the resistance associated with the PDN.
+When a transition occurs on a net, charge associated with coupling capacitors may be dumped to ground. If there are not enough ground taps charge will accumulate at the tap and the ground line will act like a large resistor, raising the ground voltage and lowering our noise margin. To bypass this problem a robust PDN with many power strap taps are needed to lower the resistance associated with the PDN. Also, it is important to have a good
 
 ### Pin Placement
 
