@@ -286,124 +286,61 @@ As with all other stages, the floorplanning will be run according to configurati
   ![](/images/12.png)
 
 ### Viewing Floorplan in Magic
-To view our floorplan in Magic we need to provide three files as input:
 
-  1. Magic technology file (sky130A.tech)
-  2. Def file of floorplan
-  3. Merged LEF file
-
-  ![](/images/13.png)
-    
-  ![](/images/14.png)
-
+Floorplan can be viewed by using a tool called Magic inside the openlane flow. To view the floorplan we need sky130A.tech file, Merged LEF file and Def file of floorplan
 
 ### Placement
 
-The next step in the Digital ASIC design flow after floorplanning is placement. The synthesized netlist has been mapped to standard cells and floorplanning phase has determined the standard cells rows, enabling placement. OpenLANE does placement in two stages:
-
-  1. Global Placement - Optimized but not legal placement. Optimization works to reduce wirelength by reducing half parameter wirelength
-  2. Detailed Placement - Legalizes placement of cells into standard cell rows while adhering to global placement
-
-To do placement in OpenLANE:
-
-  ![](/images/15.png)
-
-For placement to converge the overflow value needs to be converging to 0. At the end of placement cell legalization will be reported:
-
-  ![](/images/16.png)
+The synthesized netlist has been mapped to standard cells and floorplanning phase has determined the standard cells rows, enabling placement. OpenLANE does
+placement in two stages. In Global Placement optimizations are done to reduce wirelength by reducing half parameter wirelength and for Detailed Placement
+Legalizes placement of cells into standard cell rows. Overflow value conerges to zero during the placement run. In rc6 version, along with placemnet the power distribution is also performed which was not the case for earlier versions. Also see the post placement stats in the picture below. 
 
 ### Viewing Placement in Magic
 
-To view placement in Magic the command mirrors viewing floorplanning:
+To view placement in Magic the command is as follows
 
-  ![](/images/17.png)
-  
-  ![](/images/18.png)
 
 ### Standard Cell Design Flow
 
-Cell design is done in 3 parts:
+Standard cell design is made up of three parts
 
   1. Inputs - PDKs (Process design kits), DRC & LVS rules, SPICE models, library & user-defined specs.
-  2. Design Steps - Design steps of cell design involves Circuit Design, Layout Design, Characterization. The software GUNA used for characterization. The characterization can be classified as Timing characterization, Power characterization and Noise characterization.
+  2. Design Steps - Design steps of cell design involves Circuit Design, Layout Design, Characterization. GUNA is used for characterization. 
+     The characterization can be classified into Timing, Power and Closure.
   3. Outputs - Outputs of the Design are CDL (Circuit Description Language), GDSII, LEF, extracted Spice netlist (.cir), timing, noise, power.libs, function.
 
 ### Standard Cell Characterization
 
-Standard Cell Libraries consist of cells with different functionality/drive strengths. These cells need to be characterized by liberty files to be used by synthesis tools to determine optimal circuit arrangement. The open-source software GUNA is used for characterization.
-
-Characterization is a well-defined flow consisting of the following steps:
-
-  1. Link Model File of CMOS containing property definitions
-  2. Specify process corner(s) for the cell to be characterized
-  3. Specify cell delay and slew thresholds percentages
-  4. Specify timing and power tables
-  5. Read the parasitic extracted netlist
-  6. Apply input or stimulus
-  7. Provide necessary simulation commands 
+The process of characterizing a standard cell involves specifying the timing corner, cell delay, slew threshold, etc. It also involves reading the parasitic
+extracted netlist and providing necessary simultaion.  
 
 <!-- Day 3 Design Library Cell -->
 ## Day 3 Design Library Cell
 
-OpenLANE has the benefit of allowing changes to internal switches of the ASIC design flow on the fly. This allows users to experiment with floorplanning and placement without having to reinvoke the tool.
+OpenLANE allows changing many ASIC design flow parameters on the fly by using the command set. This allows users to play around with floorplanning and placement without having to reinvoke the tool.
 
 ### Spice Simulations
 
-To simulate standard cells spice deck wrappers will need to be created around our model files. 
-
-SPICE deck will comprise of:
-
-  - Model include statements
-  - Component connectivity, including substrate taps
-  - Output load capacitance
-  - Component values
-  - Node names
-  - Simulation commands
-
-To plot the output waveform of the spice deck we will use ngspice. The steps to run the simulation on ngpice are as follows:
-
-  1. Source the .cir spice deck file
-  2. Run the spice file by: run
-  3. Run: setplot → allows you to view any plots possible from the simulations specified in the spice deck
-  4. Select the simulation desired by entering the simulation name in the terminal
-  5. Run: display to see nodes available for plotting
-  6. Run: plot <node> vs <node> to obtain output waveform
+To simulate standard cells spice deck wrappers will need to be created around our model files. Spice deck basically includes the mosfet model information, connection between components, load capapcitances, component values, simulation commands(like .tran). The output waveform is plot by using ngspice. Use the .cir file as source and run it. Use the command plot to see the desired waveforms.
 
 ### Switching Threshold of a CMOS Inverter 
 
-CMOS cells have three modes of operation:
-
-  - Cutoff - No inversion
-  - Triode - Inversion but no pinchoff in channel
-  - Saturation - Inversion and pinchoff in channel
-
-The voltages at which the switch between the modes of operation happens is dependent on the threshold voltage of the device(s). Threshold voltage is a function of the W/L ratio of a device, therefore varying the W/L ratio will vary the output waveform of CMOS devices. 
-
-To enable efficient description of the varying waveforms a single parameter called switching threshold is used. Switching threshold is defined at the intersection of Vin = Vout. A perfectly symmetrical device will have a switching threshold such that Vin = Vout = VDD/2. 
+Threshold voltage decides the mode of operation of the MOS device. It is a function of the W/L ratio and therefore varying the ratio has a different impact on 
+its output. To enable efficient description of the varying waveforms a single parameter called switching threshold is used. Switching threshold is exactly at the intersection of Vin = Vout. A perfectly symmetrical device will have a switching threshold of Vin = Vout = VDD/2. 
 
 ### 16 Mask CMOS Process Steps
 
-  - Substrate Selection : Selection of base layer on which other regions will be formed.
-  - Create an active region for transistors : SiO2 and Si3N2 deposited. Pockets created using photoresist and lithography.
-  - Nwell & Pwell formation : Pwell uses boron and nwell uses phosphorus. Drive in diffusion by placing it in a high temperature furnace.
-  - Creating Gate terminal : For desired threshold value NA (doping Concentration) and Cox to be set.
-  - Lightly Doped Drain (LDD) formation : LDD done to avoid hot electron effect and short channel effect.
-  - Source and Drain formation : Forming the source and drain.
-  - Contacts & local interconnect Creation : SiO2 removed using HF etch. Titanium deposited using sputtering.
-  - Higher Level metal layer formation : Upper layers of metals deposited.
+First we begin by selecting a substrate on which the base layers will form. SiO2 and Si3N2 deposition is done for creating active regions of the transistors.
+Pockets are created using photolithography. Doping changes the mobility of the ions inside the structure. Pwell is created by diffusing Boron in a high 
+temperature furnace and Nwell is created by diffusing Phosphorous in a high temperature furnace. These are done seperately and preeautions are taken to protect
+the other during diffusion by using masks etc. The gate terminal is then etched. The drain is lightly doped to avoid phenomenons such as hot electron effect 
+and short channel effect.The next step is the formation of source and drain followed by contacts and local interconnect. The additional SiO2 that was added during 
+the process is cleaned off by using HF solution. Titatnium is deposited using sputtering to create the contacts as such. It is followed by deposition of upper
+layer metals.
 
 ### Magic Layout View of Inverter Standard Cell
 
 Refer to: https://github.com/nickson-jose/vsdstdcelldesign for cell files.
-
-For easier access to critical files within the lab I suggest doing the following:
-
-  1. Sudo pluma /etc/environment (can open with preferred document viewer)
-  2. Add the following variables to the file:
-
-  ![](/images/19.png)
-
-Replace the file locations as specified in your user hierarchy
 
 To invoke Magic:
 
@@ -413,9 +350,10 @@ To invoke Magic:
 
 ### Magic Key Features:
 
+One of the most important aspects of Magiic is that it performs DRC check on the fly. It also includes 
   1. Color Palette - Defines layers and associated colors
-Continuous DRC
   2. Device Inference - Automatic recognition of NMOS and PMOS devices
+  
 
 ### Device Inference
 
@@ -429,27 +367,14 @@ Run the what command in the tkcon window:
 
 ### DRC Errors
 
-DRC errors in magic will be highlighted with white dotted lines:
-
-![](/images/24.png)
-
-DRC checks are continuous in Magic, therefore the designer may ensure the design is DRC free during creation instead of performing the iterative DRC checks when the cell layout is completed.
-
-To identify DRC errors select DRC find next error:
-
-![](/images/25.png)
-
-The associated DRC error will be displayed in the tkcon window:
-
-![](/images/26.png)
+DRC checks are continuous in Magic, therefore the designer may ensure the design is DRC free during creation instead of performing the iterative DRC checks when the cell layout is completed. We can check by typing in why at the tkcon window to know the exact rule it violates
 
 For more information on DRC errors plase refer to: https://skywater-pdk--136.org.readthedocs.build/en/136/
 For more information on how to fix these DRC errors using Magic please refer to: http://opencircuitdesign.com/magic/
 
 ### PEX Extraction with Magic
 
-To extract the parasitic spice file for the associated layout one needs to create an extraction file:
-
+Extract the parasitics from the layout by performing the following
 ![](/images/27.png)
 
 After generating the extracted file we need to output the .ext file to a spice file:
@@ -462,7 +387,7 @@ After generating the extracted file we need to output the .ext file to a spice f
 
 ![](/images/30.png)
 
-To run the simulation with ngspice, invoke the ngspice tool with the spice file as input:
+To run the simulation with ngspice, invoke the ngspice tool with .cir file as the input
 
 ![](/images/31.png)
 
