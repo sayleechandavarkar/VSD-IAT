@@ -164,7 +164,7 @@
   
    #### OPENLANE FLOW
   
-  ![](/images/openlane_flow.png)  
+  ![](/images/openlane.flow.1.png)  
  
    OpenLANE flow consists of several stages. By default, all flow steps are run in sequence.
   
