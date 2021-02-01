@@ -86,7 +86,6 @@
         <li><a href="#spef-extraction">SPEF Extraction</a></li>
       </ul>
     </li>
-    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
@@ -550,9 +549,9 @@ Note: The pitch of the metal 1 power rails defines the height of the standard ce
 
 ### Global and Detailed Routing
 
-OpenLANE uses TritonRoute as the routing engine for physical implementations of designs. Routing consists of two stages:
+OpenLANE uses TritonRoute for routing. Routing basically is of two types
 
-  1. Global Routing - Routing guides are generated for interconnects on our netlist defining what layers, and where on the chip each of the nets will be reputed
+  1. Global Routing - Routing guides are generated for interconnects on our netlist defining what layers, and where on the chip each of the nets will be
   2. Detailed Routing - Metal traces are iteratively laid across the routing guides to physically implement the routing guides
 
 ### To run routing in OpenLANE:
